@@ -19,6 +19,12 @@ const routes: Routes = [
     path: 'download',
     loadComponent: () => import('./download/download.page').then( m => m.DownloadPage)
   },
+  
+  {
+    path: 'download/:exam',
+    loadComponent: () => import('./download/download.page').then(m => m.DownloadPage)
+  } ,
+  
 ];
 
 @NgModule({
