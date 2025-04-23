@@ -5,5 +5,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    hi
+  hi
+  <ion-item *ngFor="let data of jsonData; let i=index">
+    <ion-label>
+      <h2>
+        <button (click)="toggleSections(i)">
+          {{data.SubjectName}}
+        </button>
+      </h2>
+    </ion-label>
+    <ng-container 
+    *ngIf="selectedSubjectIndex === i">
+  <ion-item *ngFor="let section of jsonData[i].sections">
+    <h2>{{section.SectionName}}</h2>
+  </ion-item>
+    </ng-container>
+  </ion-item>
 </ion-content>

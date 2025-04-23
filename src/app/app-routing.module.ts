@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'download',
     loadComponent: () => import('./download/download.page').then( m => m.DownloadPage)
   },
+  {
+    path: 'movies',
+    loadComponent: () => import('./pages/movies/movies.page').then( m => m.MoviesPage)
+  },
+  {
+    path: 'movie-details',
+    loadComponent: () => import('./pages/movie-details/movie-details.page').then( m => m.MovieDetailsPage)
+  },
 ];
 
 @NgModule({
