@@ -1,0 +1,28 @@
+.section-wrapper {
+    margin-top: 20px;
+  }
+  
+  .section-box {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+  }
+  
+  .question-card {
+    margin-bottom: 20px;
+  }
+  
+  .question-img img {
+    max-width: 100%;
+    height: auto;
+  }
+  .option-conainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+  .options-list {
+    padding-left: 15px;
+  }
+  
+  

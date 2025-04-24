@@ -1,32 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { BlobService } from '../services/blob.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; // ✅ Import this
+import { IonicModule, NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-download',
+  standalone: true, // ✅ Required for loadComponent usage
+  imports: [IonicModule, CommonModule], // ✅ Add CommonModule here
   templateUrl: './download.page.html',
-  imports: [IonicModule,CommonModule],
   styleUrls: ['./download.page.scss'],
-
 })
 export class DownloadPage implements OnInit {
+  examName: string = '';
 
-  constructor(private blobService: BlobService) { }
-  // these are the variables
-  jsonData: any;
-  selectedSubjectIndex:number |null=null;
+  constructor(
+    private navCtrl: NavController,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit() {
-    const blobUrl =`https://mobstorageacct.blob.core.windows.net/mobile-container/samplejsonfordownlaod.json?sp=racwd&st=2025-04-22T11:54:41Z&se=2025-04-25T14:54:41Z&sv=2024-11-04&sr=b&sig=lXhYv2faQLI%2Fo3dVfTG0UShZpWlGKALjhaGYXGQWf%2BM%3D`;
-    this.blobService.getJsonData(blobUrl).subscribe(
-      (data) => {
-        this.jsonData = data;
-        console.log('fetched json :',this.jsonData);
-      },
-    )
-  }
-  toggleSections(index: number){
-    this.selectedSubjectIndex=this.selectedSubjectIndex===index ?null :index;
+    this.route.paramMap.subscribe(params => {
+      this.examName = params.get('exam') || '';
+    });
   }
 
+  navigateTo(page: string) {
+    this.navCtrl.navigateForward(`/download/${page}`);
+  }
+
+  navigateToMain() {
+    this.navCtrl.navigateBack('/download');
+  }
 }

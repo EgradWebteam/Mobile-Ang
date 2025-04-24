@@ -1,24 +1,83 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>download</ion-title>
+    <ion-title>Download</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  hi
-  <ion-item *ngFor="let data of jsonData; let i=index">
-    <ion-label>
-      <h2>
-        <button (click)="toggleSections(i)">
-          {{data.SubjectName}}
-        </button>
-      </h2>
-    </ion-label>
-    <ng-container 
-    *ngIf="selectedSubjectIndex === i">
-  <ion-item *ngFor="let section of jsonData[i].sections">
-    <h2>{{section.SectionName}}</h2>
-  </ion-item>
+<ion-content class="ion-padding">
+
+  <!-- If no exam is selected, show the grid of exam options -->
+  <div *ngIf="!examName">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" sizeMd="3">
+          <ion-card (click)="navigateTo('iit')">
+            <img src="../../assets/iit.png" />
+            <ion-card-content class="ion-text-center">
+              <ion-button expand="block" color="secondary">IIT</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6" sizeMd="3">
+          <ion-card (click)="navigateTo('neet')">
+            <img src="../../assets/iit.png" />
+            <ion-card-content class="ion-text-center">
+              <ion-button expand="block" color="secondary">NEET</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6" sizeMd="3">
+          <ion-card (click)="navigateTo('bitsat')">
+            <img src="../../assets/bitsat.png" />
+            <ion-card-content class="ion-text-center">
+              <ion-button expand="block" color="secondary">BITSAT</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6" sizeMd="3">
+          <ion-card (click)="navigateTo('vitee')">
+            <img src="../../assets/vit.png" />
+            <ion-card-content class="ion-text-center">
+              <ion-button expand="block" color="secondary">VITEEE</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- If an exam is selected, show content for that exam -->
+  <!-- <div *ngIf="examName">
+    <h2 class="ion-text-center">Download Page for {{ examName | uppercase }}</h2>
+
+    <ng-container [ngSwitch]="examName">
+      <div *ngSwitchCase="'iit'">
+        <p>IIT-specific content goes here...</p>
+      </div>
+      <div *ngSwitchCase="'neet'">
+        <p>NEET-specific content goes here...</p>
+      </div>
+      <div *ngSwitchCase="'bitsat'">
+        <p>BITSAT-specific content goes here...</p>
+      </div>
+      <div *ngSwitchCase="'vitee'">
+        <p>VITEEE-specific content goes here...</p>
+      </div>
+      <div *ngSwitchDefault>
+        <p>No content available for this exam.</p>
+      </div>
     </ng-container>
-  </ion-item>
+
+    <ion-button expand="full" color="medium" (click)="navigateToMain()">Back</ion-button>
+  </div> -->
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">© 2025 eGRADTutor</ion-title>
+  </ion-toolbar>
+</ion-footer>

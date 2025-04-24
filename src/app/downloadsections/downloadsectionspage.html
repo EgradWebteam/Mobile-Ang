@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Download Sections</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="jsonData.length > 0">
+    <!-- Row 1: Subjects -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto" *ngFor="let subject of jsonData; let subjectIndex = index">
+          <ion-button 
+            [color]="selectedSubjectIndex === subjectIndex ? 'primary' : 'medium'"
+            (click)="selectSubject(subjectIndex)">
+            {{ subject.SubjectName }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- Row 2: Sections -->
+      <ion-row *ngIf="selectedSubjectIndex !== null">
+        <ion-col size="auto" *ngFor="let section of jsonData[selectedSubjectIndex].sections; let sectionIndex = index">
+          <ion-button 
+            [color]="selectedSectionIndex === sectionIndex ? 'secondary' : 'medium'"
+            (click)="selectSection(sectionIndex)">
+            {{ section.SectionName }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Section Questions -->
+    <div *ngIf="selectedSectionIndex !== null">
+      <div *ngFor="let question of selectedSection?.questions">
+        <!-- Question Card -->
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Q{{ question.question_id }} - {{ question.qtype }}
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <img *ngIf="question.questionImgName" [src]="question.questionImgName" alt="Question Image" style="max-width: 100%; margin-bottom: 10px;">
+            <p>{{ question.document_name }}</p>
+
+            <div *ngIf="question.options?.length > 0">
+              <!-- MCQ -->
+              <div *ngIf="question.qtype === 'MCQ'">
+                <ion-radio-group
+                  [value]="question.userAnswer"
+                  (ionChange)="handleAnswer(question.question_id, $event.detail.value)">
+                  <ion-item *ngFor="let option of question.options">
+                    <ion-radio slot="start" [disabled]="canShowSolution(question)" [value]="option.option_index" ></ion-radio>
+                    <ion-label>
+                      {{ option.option_index }}
+                      <img [src]="option.optionImgName" alt="Option Image" class="option-image">
+                    </ion-label>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+
+              <!-- MSQ -->
+              <div *ngIf="question.qtype === 'MSQ'">
+                <ion-item *ngFor="let option of question.options">
+                  <ion-checkbox
+                  slot="start"
+                  [disabled]="
+                    canShowSolution(question) || 
+                    (!question.userAnswer?.includes(option.option_index) &&
+                     question.userAnswer?.length >= question.answer.length)
+                  "
+                  [checked]="question.userAnswer?.includes(option.option_index)"
+                  (ionChange)="handleAnswer(question.question_id, option.option_index, $event)">
+                </ion-checkbox>
+                
+                  <ion-label>
+                    {{ option.option_index }}
+                    <img [src]="option.optionImgName" alt="Option Image" class="option-image">
+                  </ion-label>
+                </ion-item>
+              </div>
+            </div>
+
+            <!-- Show Solution Button -->
+            <ion-button expand="block" color="tertiary" 
+                        (click)="checkSolution(question)" 
+                        [disabled]="!canShowSolution(question)">
+              Show Solution
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Solution Display -->
+        <ion-card *ngIf="question.showResult" color="light">
+          <ion-card-header>
+            <ion-card-subtitle>Result</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p [style.color]="question.isCorrect ? 'green' : 'red'">
+              {{ question.isCorrect ? '✅ Correct!' : '❌ Incorrect!' }}
+            </p>
+            <img *ngIf="question.solution" [src]="question.solution" alt="Solution Image" style="max-width: 100%;">
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>
