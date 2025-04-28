@@ -69,7 +69,10 @@
                         </ng-container>
                       </ng-container>
                       <!-- Display option index when the result is not shown -->
-                      <ng-container *ngIf="!question.showResult">{{ option.option_index }}</ng-container>
+                      <ng-container *ngIf="!question.showResult || (question.showResult && option.option_index !== question.answer && option.option_index !== question.userAnswer)">
+    {{ option.option_index }}
+  </ng-container>
+                      
                     </div>
                   </div>
                   <ion-label (click)="!canShowSolution(question) && handleAnswer(question.question_id, option.option_index)">
@@ -94,7 +97,7 @@
                         correct:
                           question.showResult &&
                           question.answer.includes(option.option_index) &&
-                          question.selectedOptions?.includes(option.option_index),
+                          question.userAnswerWithCorrect?.includes(option.option_index),
                         wrong:
                           question.showResult &&
                           !question.answer.includes(option.option_index) &&
@@ -104,15 +107,15 @@
                     >
                       <ng-container *ngIf="question.showResult">
                         <ng-container *ngIf="question.answer.includes(option.option_index) &&
-                        question.selectedOptions?.includes(option.option_index)">
+                        question.userAnswerWithCorrect?.includes(option.option_index)">
                           ✔️
                         </ng-container>
                         <ng-container *ngIf="!question.answer.includes(option.option_index) &&
-                        question.selectedOptions?.includes(option.option_index)">
+                        question.userAnswer?.includes(option.option_index)">
                           ❌
                         </ng-container>
                       </ng-container>
-                      <ng-container *ngIf="!question.selectedOptions?.includes(option.option_index)">
+                      <ng-container *ngIf="!question.userAnswerWithCorrect?.includes(option.option_index)">
                         {{ option.option_index }}
                       </ng-container>
                     </div>

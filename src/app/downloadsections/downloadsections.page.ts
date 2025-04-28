@@ -78,8 +78,6 @@ export class DownloadSectionsPage implements OnInit {
   handleMSQAnswer(questionId: number, optionIndex: string, event?: any) {
     if (!this.selectedSection?.questions) return;
   
-    console.log(optionIndex);
-  
     const question = this.selectedSection.questions.find(
       (q: any) => q.question_id === questionId
     );
@@ -105,31 +103,53 @@ export class DownloadSectionsPage implements OnInit {
       question.userAnswer = [...selectedOptions, optionIndex];
     }
   
-    // Update selected options in the question data
-    question.selectedOptions = [...question.userAnswer];
-  
-    // Determine correctness and solution visibility
+    // Create a new array to store user answers + correct answers if any wrong option is selected
     const correctAnswers: string[] = question.answer?.split(",") || [];
-    const allCorrectSelected = correctAnswers.every((answer: string) =>
-      selectedOptions.includes(answer)
-    );
-    const hasWrongAnswer = selectedOptions.some(
-      (opt) => !correctAnswers.includes(opt)
-    );
+    let userAnswerWithCorrect = [...question.userAnswer]; // Start with user's selected options
   
-    question.isCorrect = allCorrectSelected;
-    question.showResult = true;
+    // Check if any wrong answer has been selected
+
+    // Debugging line to check if we are correctly identifying wrong answers
+ 
+    console.log("selectedOptions",  question.userAnswer);
+    
+    console.log("selectedOptions", question.userAnswer);
+    console.log("correctAnswers", correctAnswers);
   
+    const hasWrongAnswer = question.userAnswer.some(
+      (opt: string) => !correctAnswers.includes(opt)
+    );
+    
+    console.log("hasWrongAnswer", hasWrongAnswer);
     if (hasWrongAnswer) {
-      question.isCorrect = false;
-      question.showSolution = true;
+      console.log("fff")
+      // If any wrong option is selected, add the missing correct answers
+      correctAnswers.forEach((correctAnswer: string) => {
+        if (!selectedOptions.includes(correctAnswer) && !userAnswerWithCorrect.includes(correctAnswer)) {
+          userAnswerWithCorrect.push(correctAnswer); // Add missing correct answers
+        }
+      });
+      // Remove duplicates by using Set (union of selectedOptions and correct answers)
+      const uniqueAnswers = new Set([...userAnswerWithCorrect, ...selectedOptions, ...correctAnswers]);
+  
+      // Store the unique answers in question.userAnswerWithCorrect
+      question.userAnswerWithCorrect = Array.from(uniqueAnswers);
     } else {
-      question.showSolution = false;
+      // If no wrong answer, just send the selected user answers
+      question.userAnswerWithCorrect = [...question.userAnswer]; // No missing correct answers
     }
   
+   
+  
+    // Log for debugging
     console.log('userAnswer after:', question.userAnswer);
-    console.log('Selected Options:', selectedOptions);
+    console.log('userAnswerWithCorrect:', question.userAnswerWithCorrect);
+  
+    // Show result immediately after selecting an option
+    question.showResult = true;
   }
+  
+  
   
   isOptionDisabled(question: any, option: any): boolean {
     if (!question || !question.answer || !question.userAnswer) return false;
