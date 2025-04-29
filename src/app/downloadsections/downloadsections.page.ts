@@ -57,24 +57,25 @@ export class DownloadSectionsPage implements OnInit {
       question.showResult = true;
       question.isCorrect = question.userAnswer === question.answer;
       question.answer = question.answer || ''; // Ensure answer is defined
-    } else if (question.qtype === 'MSQ') {
-      if (!question.userAnswer) question.userAnswer = [];
-  
-      const isChecked = event?.detail?.checked;
-  
-      // Limit selection to the number of correct answers
-      const maxSelections = question.answer?.length || 0;
-  
-      if (isChecked) {
-        if (question.userAnswer.length < maxSelections) {
-          question.userAnswer.push(selectedOption);
+      question.canShowSolution = true;
         }
-      } else {
-        question.userAnswer = question.userAnswer.filter((opt: string) => opt !== selectedOption);
-      }
-    }
   }
-
+  handleNATAnswer(questionId: number, answer: string, event?: any) {
+    if (!this.selectedSection?.questions) return;
+  console.log("fgfg")
+    const question = this.selectedSection.questions.find(
+      (q: any) => q.question_id === questionId
+    );
+  
+    if (!question) return;
+  
+    question.userAnswer = answer;
+    question.showResult = true;
+    question.isCorrect = question.userAnswer === question.answer;
+    console.log("question.answer",question.isCorrect)
+    question.answer = question.answer || ''; 
+    question.canShowSolution = true;// Ensure answer is defined
+  }
   handleMSQAnswer(questionId: number, optionIndex: string, event?: any) {
     if (!this.selectedSection?.questions) return;
   
@@ -147,6 +148,7 @@ export class DownloadSectionsPage implements OnInit {
   
     // Show result immediately after selecting an option
     question.showResult = true;
+    question.canShowSolution = this.isOptionDisabled(question, question.answer);
   }
   
   
@@ -169,16 +171,20 @@ export class DownloadSectionsPage implements OnInit {
   
   
   
-canShowSolution(question: any): boolean {
-  if (question.qtype === 'MCQ') {
-    return !!question.userAnswer;
-  }
-  if (question.qtype === 'MSQ') {
-    return this.isOptionDisabled(question, question.answer);
-  }
+// canShowSolution(question: any): boolean {
+ 
+//   if (question.qtype === 'MCQ') {
+//     return !!question.userAnswer;
+//   }
+//   if (question.qtype === 'MSQ') {
+//     return this.isOptionDisabled(question, question.answer);
+//   }
+//   if (question.qtype === 'NATI') {
+//     return !!question.showResult ;
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 
   

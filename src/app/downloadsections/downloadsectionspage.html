@@ -48,7 +48,7 @@
             <div *ngIf="question.options?.length > 0">
               <!-- MCQ -->
               <div *ngIf="question.qtype === 'MCQ'">
-                <ion-item *ngFor="let option of question.options">
+                <ion-item *ngFor="let option of question.options"   [ngClass]="{'disabled-item': question.canShowSolution}" [disabled]="question.canShowSolution" (click)="handleAnswer(question.question_id, option.option_index)">
                   <div class="custom-radio">
                     <div
                       class="circle"
@@ -56,7 +56,7 @@
                         'selected': question.userAnswer?.includes(option.option_index),
                         'correct': question.showResult && question.answer.includes(option.option_index),
                         'wrong': question.showResult && !question.answer.includes(option.option_index) && question.userAnswer?.includes(option.option_index),
-                        'disabled': canShowSolution(question) || isOptionDisabled(question, option) }">
+                         }">
                       <!-- Conditional Icon -->
                       <ng-container *ngIf="question.showResult">
                         <!-- Show ❌ for incorrect answer -->
@@ -75,7 +75,7 @@
                       
                     </div>
                   </div>
-                  <ion-label (click)="!canShowSolution(question) && handleAnswer(question.question_id, option.option_index)">
+                  <ion-label >
                     <img [src]="option.optionImgName" alt="Option Image" class="option-image">
                   </ion-label>
                 </ion-item>
@@ -85,10 +85,10 @@
                 <ion-item *ngFor="let option of question.options">
                   <div
                     class="option-container"
-                    ngClass=" {
-                      disabled: isOptionDisabled(question, option),
-                    }"
-                    (click)="!isOptionDisabled(question, option) && handleMSQAnswer(question.question_id, option.option_index, $event)"
+                    [ngClass]="{'disabled-item': question.canShowSolution}"
+                   
+                    (click)="!question.canShowSolution && handleMSQAnswer(question.question_id, option.option_index, $event)"
+
                   >
                     <div
                       class="square"
@@ -101,8 +101,7 @@
                         wrong:
                           question.showResult &&
                           !question.answer.includes(option.option_index) &&
-                          question.userAnswer?.includes(option.option_index),
-                        disabled: isOptionDisabled(question, option)
+                          question.userAnswer?.includes(option.option_index)
                       }"
                     >
                       <ng-container *ngIf="question.showResult">
@@ -133,7 +132,10 @@
               
               </div>
               
-              
+              <div *ngIf="question.qtype === 'NATI'">
+                <input type="text" [(ngModel)]="question.userAnswer" placeholder="Enter your answer"  [disabled]="question.canShowSolution" />
+                <ion-button (click)="handleNATAnswer(question.question_id, question.userAnswer)"  [disabled]="question.canShowSolution" >Submit</ion-button>
+                </div>
           
 
             <!-- Show Solution Button -->
@@ -141,7 +143,7 @@
   expand="block" 
   color="tertiary" 
   (click)="toggleSolution(question)" 
-  [disabled]="!canShowSolution(question)">
+  [disabled]="!question.canShowSolution">
   {{ question.showSolution ? 'Hide Solution' : 'Show Solution' }}
 </ion-button>
           </ion-card-content>
