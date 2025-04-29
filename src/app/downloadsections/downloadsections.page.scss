@@ -35,7 +35,11 @@
   margin-right: 10px;
   user-select: none;
 }
-
+.nati-container {
+  display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+}
 .circle {
  
   border-radius: 50%;

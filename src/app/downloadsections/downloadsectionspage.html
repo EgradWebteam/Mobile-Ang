@@ -43,7 +43,7 @@
 
           <ion-card-content>
             <img *ngIf="question.questionImgName" [src]="question.questionImgName" alt="Question Image" style="max-width: 100%; margin-bottom: 10px;">
-            <p>{{ question.document_name }}</p>
+            <!-- <p>{{ question.document_name }}</p> -->
 
             <div *ngIf="question.options?.length > 0">
               <!-- MCQ -->
@@ -132,9 +132,12 @@
               
               </div>
               
-              <div *ngIf="question.qtype === 'NATI'">
-                <input type="text" [(ngModel)]="question.userAnswer" placeholder="Enter your answer"  [disabled]="question.canShowSolution" />
-                <ion-button (click)="handleNATAnswer(question.question_id, question.userAnswer)"  [disabled]="question.canShowSolution" >Submit</ion-button>
+              <div *ngIf="question.qtype === 'NATI'" class="nati-container">
+                <input type="text" [(ngModel)]="question.userAnswer" placeholder="Enter your answer"  [disabled]="question.canShowSolution" />    <p *ngIf="question.canShowSolution">
+                  {{ question.isCorrect ? '✔️ ' : '❌ ' }}
+                </p>
+                
+                <ion-button (click)="handleNATAnswer(question.question_id, question.userAnswer)"  [disabled]="question.canShowSolution" class="natsubmit">Submit</ion-button>
                 </div>
           
 
@@ -156,8 +159,10 @@
           </ion-card-header>
           <ion-card-content>
             <p [style.color]="question.isCorrect ? 'green' : 'red'">
-              {{ question.isCorrect ? '✅ Correct!' : '❌ Incorrect!' }}
+              {{ question.isCorrect ? '✔️ Correct!' : '❌ Incorrect!' }}
+           
             </p>
+            
             <img *ngIf="question.solution" [src]="question.solution" alt="Solution Image" style="max-width: 100%;">
           </ion-card-content>
         </ion-card>

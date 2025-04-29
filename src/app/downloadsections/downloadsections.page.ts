@@ -56,6 +56,7 @@ export class DownloadSectionsPage implements OnInit {
       question.userAnswer = selectedOption;
       question.showResult = true;
       question.isCorrect = question.userAnswer === question.answer;
+      console.log("question.isCorrect", question.isCorrect);
       question.answer = question.answer || ''; // Ensure answer is defined
       question.canShowSolution = true;
         }
@@ -120,7 +121,8 @@ export class DownloadSectionsPage implements OnInit {
     const hasWrongAnswer = question.userAnswer.some(
       (opt: string) => !correctAnswers.includes(opt)
     );
-    
+    question.isCorrect = hasWrongAnswer ? false : question.userAnswer.length === correctAnswers.length && question.userAnswer.every((ans: string) => correctAnswers.includes(ans));
+    console.log("question.isCorrect", question.isCorrect);
     console.log("hasWrongAnswer", hasWrongAnswer);
     if (hasWrongAnswer) {
       console.log("fff")
@@ -190,16 +192,6 @@ export class DownloadSectionsPage implements OnInit {
   
   // Check the solution for correctness
   checkSolution(question: any): void {
-    if (question.qtype === 'MCQ') {
-      question.isCorrect = question.userAnswer === question.answer;
-    } else if (question.qtype === 'MSQ') {
-      const selected = question.userAnswer || [];
-      const correct = question.answer || [];
-      question.isCorrect =
-        selected.length === correct.length &&
-        selected.every((ans: string) => correct.includes(ans));
-    }
-  
     // Always check the solution when this function is called
     question.showResult = true;
     question.showSolution = true; // Show solution after checking
