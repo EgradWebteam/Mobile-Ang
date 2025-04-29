@@ -37,13 +37,18 @@
 }
 
 .circle {
-  width: 24px;
-  height: 24px;
+ 
   border-radius: 50%;
+  border: 2px solid #ccc;
+  color: #333;
+  display: inline-block;
+  cursor: pointer;
   text-align: center;
-  line-height: 24px;
-  border: 1px solid #ccc;
+  line-height: 30px;
+  font-size: 16px;
   margin-right: 10px;
+  width: 30px;
+  height: 30px;
 }
 
 .circle.selected {
@@ -76,20 +81,16 @@
   height: 30px;
 }
 
-.square.selected {
-  background-color: #3880ff;
-  color: #fff;
-  border-color: #3880ff;
-}
+
 
 .square.correct {
-  background-color: green;
+
   color: #fff;
   border-color: green;
 }
 
 .square.wrong {
-  background-color: red;
+  
   color: #fff;
   border-color: red;
 }

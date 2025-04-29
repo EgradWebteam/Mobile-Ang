@@ -84,83 +84,102 @@ export class DownloadSectionsPage implements OnInit {
   
     if (!question) return;
   
-    // Get current user's selected answers (MSQ can have multiple answers)
+    console.log('userAnswer before:', question.userAnswer);
+  
+    // Ensure userAnswer is always initialized
+    if (!question.userAnswer) {
+      question.userAnswer = [];
+    }
+  
     const selectedOptions: string[] = question.userAnswer || [];
-  question.selectedOptions = selectedOptions; // Store selected options in the question object
-    // Get the correct answers for the question (split into an array if it's a string)
+    const isOptionSelected = selectedOptions.includes(optionIndex);
+  
+    // Toggle the selected option on click
+    if (isOptionSelected) {
+      // If the option is already selected, remove it
+      question.userAnswer = selectedOptions.filter((opt) => opt !== optionIndex);
+    } else {
+      // If the option is not selected, add it
+      question.userAnswer = [...selectedOptions, optionIndex];
+    }
+  
+    // Create a new array to store user answers + correct answers if any wrong option is selected
     const correctAnswers: string[] = question.answer?.split(",") || [];
+    let userAnswerWithCorrect = [...question.userAnswer]; // Start with user's selected options
   
-    // Check if the clicked option is selected or not
-    const isChecked = event?.detail?.checked;
+    // Check if any wrong answer has been selected
+
+    // Debugging line to check if we are correctly identifying wrong answers
+ 
+    console.log("selectedOptions",  question.userAnswer);
+    
+    console.log("selectedOptions", question.userAnswer);
+    console.log("correctAnswers", correctAnswers);
   
-    if (isChecked) {
-      // If it's selected, add it to the list of selected options
-      if (!selectedOptions.includes(optionIndex)) {
-        selectedOptions.push(optionIndex);
-      }
-    } else {
-      // If it's unchecked, remove it from the list of selected options
-      const updatedOptions = selectedOptions.filter(
-        (option: string) => option !== optionIndex
-      );
-      selectedOptions.length = 0; // Clear existing selections before pushing updated ones
-      selectedOptions.push(...updatedOptions);
-    }
-  
-    // Update user selections in the question data
-    question.userAnswer = selectedOptions;
-  
-    // Check if all correct answers are selected
-    const allCorrectSelected = correctAnswers.every((answer: string) =>
-      selectedOptions.includes(answer)
+    const hasWrongAnswer = question.userAnswer.some(
+      (opt: string) => !correctAnswers.includes(opt)
     );
-  
-    // Check if any wrong answer is selected
-    const hasWrongAnswer = selectedOptions.some(opt => !correctAnswers.includes(opt));
-  
-    // Mark the question as correct if all correct answers are selected
-    question.isCorrect = allCorrectSelected;
-    question.showResult = true;  // Always show result once a selection is made
-  
-    // If there are wrong answers, show correct answers immediately
+    
+    console.log("hasWrongAnswer", hasWrongAnswer);
     if (hasWrongAnswer) {
-      question.isCorrect = false;
-      question.showSolution = true;  // Show the correct answers when wrong answers are selected
+      console.log("fff")
+      // If any wrong option is selected, add the missing correct answers
+      correctAnswers.forEach((correctAnswer: string) => {
+        if (!selectedOptions.includes(correctAnswer) && !userAnswerWithCorrect.includes(correctAnswer)) {
+          userAnswerWithCorrect.push(correctAnswer); // Add missing correct answers
+        }
+      });
+      // Remove duplicates by using Set (union of selectedOptions and correct answers)
+      const uniqueAnswers = new Set([...userAnswerWithCorrect, ...selectedOptions, ...correctAnswers]);
+  
+      // Store the unique answers in question.userAnswerWithCorrect
+      question.userAnswerWithCorrect = Array.from(uniqueAnswers);
     } else {
-      question.showSolution = false; // Hide solution if all answers are correct
+      // If no wrong answer, just send the selected user answers
+      question.userAnswerWithCorrect = [...question.userAnswer]; // No missing correct answers
     }
   
-    // Always update the options in the question
-    question.userAnswer = selectedOptions;
+   
+  
+    // Log for debugging
+    console.log('userAnswer after:', question.userAnswer);
+    console.log('userAnswerWithCorrect:', question.userAnswerWithCorrect);
+  
+    // Show result immediately after selecting an option
+    question.showResult = true;
   }
   
-  // Disable options based on user selection (for MSQ)
+  
+  
   isOptionDisabled(question: any, option: any): boolean {
     if (!question || !question.answer || !question.userAnswer) return false;
   
     const correctAnswers: string[] = question.answer?.split(",") || [];
     const selectedOptions: string[] = question.userAnswer || [];
   
-    // Disable options if a wrong answer is selected or all correct answers are selected
-    const hasWrongAnswer = selectedOptions.some(opt => !correctAnswers.includes(opt));
-    const allCorrectSelected = correctAnswers.every(answer => selectedOptions.includes(answer));
+    const hasWrongAnswer = selectedOptions.some(
+      (opt) => !correctAnswers.includes(opt)
+    );
+    const allCorrectSelected = correctAnswers.every((answer) =>
+      selectedOptions.includes(answer)
+    );
   
     return hasWrongAnswer || allCorrectSelected;
   }
   
-  // Check if solution can be shown based on user answers and question type
-  canShowSolution(question: any): boolean {
-    if (question.qtype === 'MCQ') {
-      return !!question.userAnswer;
-    }
-    if (question.qtype === 'MSQ') {
-      // Allow solution to be shown if all correct answers are selected or if a wrong answer is selected
-      const correctAnswers: string[] = question.answer?.split(",") || [];
-      return question.userAnswer?.length === correctAnswers.length || question.showSolution;
-    }
-    return false;
-  }
   
+  
+canShowSolution(question: any): boolean {
+  if (question.qtype === 'MCQ') {
+    return !!question.userAnswer;
+  }
+  if (question.qtype === 'MSQ') {
+    return this.isOptionDisabled(question, question.answer);
+  }
+
+  return false;
+}
+
 
   
   // Check the solution for correctness
