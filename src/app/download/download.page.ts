@@ -17,7 +17,29 @@ export class DownloadPage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute
   ) {}
-
+  examCards = [
+    {
+      name: 'IIT',
+      key: 'iit',
+      image: '../../assets/iit.png'
+    },
+    {
+      name: 'NEET',
+      key: 'neet',
+      image: '../../assets/iit.png'
+    },
+    {
+      name: 'BITSAT',
+      key: 'bitsat',
+      image: '../../assets/bitsat.png'
+    },
+    {
+      name: 'VITEEE',
+      key: 'vitee',
+      image: '../../assets/vit.png'
+    }
+  ];
+  
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.examName = params.get('exam') || '';

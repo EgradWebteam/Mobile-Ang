@@ -25,10 +25,16 @@
       eGRADTutor is an Edtech firm started with a vision to blend the boundaries in education and take best-in-class courses and teachers virtually to every corner of the country. Our courses are developed by the alumni of IIT's/IISc with an intent to enhance the student's abilities to face some of the toughest exams of the country. 
     </ion-card-content>
   
-    <ion-button fill="clear">Action 1</ion-button>
-    <ion-button fill="clear">Action 2</ion-button>
+    <div class="ion-text-center">
+      <ion-button (click)="goToDownloadPage()">Downloads Page</ion-button>
+    </div>
+    
+ 
   </ion-card>
-  <div id="container">
-   <button (click)="goToDownloadPage()">Downloads Page</button>
-  </div>
+
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">© 2025 eGRADTutor</ion-title>
+  </ion-toolbar>
+</ion-footer>
