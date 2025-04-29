@@ -37,9 +37,11 @@ export class DownloadSectionsPage implements OnInit {
 
   // Handle subject selection
   selectSubject(index: number) {
-    this.selectedSubjectIndex = index;
-    this.selectedSectionIndex = null; // Reset section selection
-    this.selectedSection = {}; // Reset selected section data
+    if (this.selectedSubjectIndex !== index) {
+      this.selectedSubjectIndex = index;
+      this.selectedSectionIndex = null; // Reset only if subject changes
+      this.selectedSection = {};        // Reset section data
+    }// Reset selected section data
   }
 
   // Handle answer selection for MCQ and MSQ

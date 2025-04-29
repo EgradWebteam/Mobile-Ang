@@ -21,6 +21,7 @@
   align-items: center;
   gap: 1rem;
 }
+
 .options-list {
   padding-left: 15px;
 }
@@ -33,7 +34,8 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
+  text-transform: uppercase;
   font-size: 16px;
   margin-right: 5px;
   user-select: none;
@@ -61,7 +63,7 @@
 
 }
 .disabled-item,.option-container.disabled-item  {
-  opacity: 0.8; /* visually grayed out */
+  opacity: 0.95; /* visually grayed out */
   pointer-events: none; /* disables interaction */
   cursor: not-allowed;
 }
