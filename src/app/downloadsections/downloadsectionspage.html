@@ -1,15 +1,68 @@
-<ion-header>
+<ion-menu contentId="main-content" side="start">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{examDataSelected.dataExamName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <!-- Year Section -->
+      
+      
+      <ion-item *ngFor="let year of getYears()">
+        <div class="yearsbox"> 
+        <ion-button  (click)="toggleYear(year)">
+          {{ year }}
+        </ion-button>
+    
+        <!-- Months Section (Appears below selected year) -->
+        <ng-container *ngIf="selectedYear === year">
+          <div style="margin-left: 10px;">
+            <div class="monthsconatiner">
+            <ion-item *ngFor="let month of getMonths(year)">
+              <div class="monthsbox">
+              <ion-button  (click)="toggleMonth(month)">
+                {{ month.month }}
+              </ion-button>
+    
+              <!-- Shifts Section (Appears below selected month) -->
+              <ng-container *ngIf="selectedMonth === month">
+                <div style="margin-left: 10px;">
+                 
+                  <ion-item *ngFor="let shift of month.data">
+                    <ion-button  (click)="selectShift(shift)">
+                      {{ shift.shift }}
+                    </ion-button>
+                  </ion-item>
+                </div>
+              </ng-container>
+            </div>
+            </ion-item>
+          </div>
+        </div>
+        </ng-container>
+      </div>
+      </ion-item>
+    </ion-list>
+    
+    
+  </ion-content>
+</ion-menu><ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
+     
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Download Sections</ion-title>
+    <ion-buttons slot="end">
+    <ion-menu-button autoHide="false"></ion-menu-button>
+  </ion-buttons>
+    <ion-title>{{examDataSelected.dataExamName}} Download Sections</ion-title>
   </ion-toolbar>
  
 </ion-header>
 
-<ion-content>
-  <div *ngIf="jsonData.length > 0">
+<ion-content id="main-content">
+  <div *ngIf="jsonData.length > 0 && selectedShift">
     <!-- Row 1: Subjects -->
    
       <!-- Row 1: Subjects -->
@@ -176,6 +229,34 @@
         </ion-card>
       </div>
     </div>
+  </div>
+  <div *ngIf="!selectedShift">
+    <ion-card color="light" class="instruction-card">
+      <ion-card-header>
+        <ion-card-title>Welcome to the Practice Quiz</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>📌 How to Start:</strong></p>
+        <ul>
+          <li>Click on the ☰ <strong>hamburger menu</strong> at the top-right.</li>
+          <li>Select a <strong>Year</strong> → <strong>Month</strong> → <strong>Shift</strong>.</li>
+          <li>Close the menu to begin practicing questions.</li>
+        </ul>
+  
+        <p><strong>🎯 Features:</strong></p>
+        <ul>
+          <li>Subject-wise & chapter-wise practice of JEE (Main) PYQs</li>
+          <li>Video + detailed solutions for every question</li>
+          <li>Unlimited practice & reset options</li>
+        </ul>
+  
+        <p><strong>⚠️ Notes:</strong></p>
+        <ul>
+          <li>Keyboard and right-click are disabled during the quiz.</li>
+          <li>We strive for accuracy, but if you find any errors, let us know so we can fix them.</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
 <ion-footer>
