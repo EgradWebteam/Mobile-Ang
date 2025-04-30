@@ -1,0 +1,254 @@
+[
+    {
+    "id": 1,
+    "data_heading": "JEE ADVANCE ",
+    "dataExamName": "IIT",
+    "dataExamImg": "./assets/iit.png",
+    "2025": [
+      {
+        "year": 2025,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 501,
+               "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+              "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          },{
+            "month": "FEBRUARY",
+            "data": [
+              {
+                "id": 501,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "2024": [
+      {
+        "year": 2024,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 701,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 702,
+               "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },{
+    "id": 2,
+    "data_heading": "NEET",
+    "dataExamName": "NEET",
+    "dataExamImg": "./assets/iit.png",
+    "2025": [
+      {
+        "year": 2025,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 501,
+              "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+               "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          },{
+            "month": "FEBRUARY",
+            "data": [
+              {
+                "id": 501,
+               "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "2024": [
+      {
+        "year": 2024,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 701,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 702,
+               "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },{
+    "id": 3,
+    "data_heading": "BITSAT",
+    "dataExamName": "BITSAT",
+    "dataExamImg": "./assets/bitsat.png",
+    "2025": [
+      {
+        "year": 2025,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 501,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          },{
+            "month": "FEBRUARY",
+            "data": [
+              {
+                "id": 501,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+               "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "2024": [
+      {
+        "year": 2024,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 701,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 702,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },{
+    "id": 4,
+    "data_heading": "VITEE",
+    "dataExamName": "VITEE",
+    "dataExamImg": "./assets/vit.png",
+    "2025": [
+      {
+        "year": 2025,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 501,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          },{
+            "month": "FEBRUARY",
+            "data": [
+              {
+                "id": 501,
+               "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 502,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "2024": [
+      {
+        "year": 2024,
+        "months": [
+          {
+            "month": "JANUARY",
+            "data": [
+              {
+                "id": 701,
+                "shift": "10th Jan - Shift-1",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              },
+              {
+                "id": 702,
+                "shift": "10th Jan - Shift-2",
+                "shiftDataUrl": "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }]

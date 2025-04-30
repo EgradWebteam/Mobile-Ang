@@ -4,7 +4,8 @@ import { BlobService } from '../services/blob.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+// import { HttpClient } from '@angular/common/http';
+import { ExamDataService } from '../services/examdata.service'; 
 @Component({
   selector: 'app-download',
   templateUrl: './downloadsectionspage.html',
@@ -20,295 +21,304 @@ export class DownloadSectionsPage implements OnInit {
 dropdownOpen: boolean = false; // To control the dropdown state
   
   examDataSelected: any = null; 
-  examData: any = [
-    {
-    id: 1,
-    data_heading: "JEE ADVANCE ",
-    dataExamName: "JEE ADVANCE",
-    dataExamImg: "/JEE-Advanced-2025-Logo.webp",
-    "2025": [
-      {
-        year: 2025,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          },{
-            month: "FEBRUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "2024": [
-      {
-        year: 2024,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 701,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 702,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },{
-    id: 2,
-    data_heading: "NEET",
-    dataExamName: "NEET",
-    dataExamImg: "/NEET",
-    "2025": [
-      {
-        year: 2025,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          },{
-            month: "FEBRUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "2024": [
-      {
-        year: 2024,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 701,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 702,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },{
-    id: 3,
-    data_heading: "BITSAT",
-    dataExamName: "BITSAT",
-    dataExamImg: "/NEET",
-    "2025": [
-      {
-        year: 2025,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          },{
-            month: "FEBRUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "2024": [
-      {
-        year: 2024,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 701,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 702,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },{
-    id: 4,
-    data_heading: "VITEE",
-    dataExamName: "VITEE",
-    dataExamImg: "/NEET",
-    "2025": [
-      {
-        year: 2025,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          },{
-            month: "FEBRUARY",
-            data: [
-              {
-                id: 501,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 502,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "2024": [
-      {
-        year: 2024,
-        months: [
-          {
-            month: "JANUARY",
-            data: [
-              {
-                id: 701,
-                shift: "10th Jan - Shift-1",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              },
-              {
-                id: 702,
-                shift: "10th Jan - Shift-2",
-                shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }];
-  
+  // examData: any = [
+  //   {
+  //   id: 1,
+  //   data_heading: "JEE ADVANCE ",
+  //   dataExamName: "JEE ADVANCE",
+  //   dataExamImg: "/JEE-Advanced-2025-Logo.webp",
+  //   "2025": [
+  //     {
+  //       year: 2025,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         },{
+  //           month: "FEBRUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ],
+  //   "2024": [
+  //     {
+  //       year: 2024,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 701,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 702,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },{
+  //   id: 2,
+  //   data_heading: "NEET",
+  //   dataExamName: "NEET",
+  //   dataExamImg: "/NEET",
+  //   "2025": [
+  //     {
+  //       year: 2025,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         },{
+  //           month: "FEBRUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ],
+  //   "2024": [
+  //     {
+  //       year: 2024,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 701,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 702,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },{
+  //   id: 3,
+  //   data_heading: "BITSAT",
+  //   dataExamName: "BITSAT",
+  //   dataExamImg: "/NEET",
+  //   "2025": [
+  //     {
+  //       year: 2025,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         },{
+  //           month: "FEBRUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ],
+  //   "2024": [
+  //     {
+  //       year: 2024,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 701,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 702,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },{
+  //   id: 4,
+  //   data_heading: "VITEE",
+  //   dataExamName: "VITEE",
+  //   dataExamImg: "/NEET",
+  //   "2025": [
+  //     {
+  //       year: 2025,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         },{
+  //           month: "FEBRUARY",
+  //           data: [
+  //             {
+  //               id: 501,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 502,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ],
+  //   "2024": [
+  //     {
+  //       year: 2024,
+  //       months: [
+  //         {
+  //           month: "JANUARY",
+  //           data: [
+  //             {
+  //               id: 701,
+  //               shift: "10th Jan - Shift-1",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             },
+  //             {
+  //               id: 702,
+  //               shift: "10th Jan - Shift-2",
+  //               shiftDataUrl: "https://mobstorageacct.blob.core.windows.net/mobile-container/msqs.json?sp=racwd&st=2025-04-28T09:20:25Z&se=2025-05-28T17:20:25Z&sv=2024-11-04&sr=b&sig=leGCLvLRyD37n3up4Sj67AV4UBdbTbHWwQLTAhDG0xo%3D"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }];
+  examData: any = []; // Initialize as an empty array
   selectedYear: any = null;
   selectedMonth: any = null;
   selectedShift: any = null;
   selectedDocUrl: string = '';
   
-  constructor(private blobService: BlobService, private route: ActivatedRoute) {} // ✅ Inject route
-
+  constructor(private blobService: BlobService, private route: ActivatedRoute,  private examDataService: ExamDataService ) {} // ✅ Inject route
   ngOnInit() {
-    const examIdMap: { [key: string]: number } = {
-      iit: 1,
-      neet: 2,
-      bitsat: 3,
-      vitee: 4
-    };
-  
-    this.route.paramMap.subscribe((params) => {
-      const examKey = params.get('exam')?.toLowerCase(); // Ensure lowercase
- 
-      const examId = examIdMap[examKey!]; // Use non-null assertion since you expect this route
-      console.log( examKey ,examId  )
-      if (examId !== undefined) {
-        const foundExam = this.examData.find((e: any) => e.id === examId);
-       
-        if (foundExam) {
-          this.examDataSelected = foundExam;
-        } else {
-          console.warn(`No exam found with ID ${examId}`);
-        }
-      } else {
-        console.warn(`Invalid exam type in route: ${examKey}`);
+    this.examDataService.examData$.subscribe((data) => {
+      if (data.length === 0) {
+        this.examDataService.fetchExamData();
+      }
+
+      this.examData = data;
+
+      if (this.examData.length > 0) {
+        const examIdMap: { [key: string]: number } = {
+          IIT: 1,
+          NEET: 2,
+          BITSAT: 3,
+          VITEE: 4
+        };
+
+        this.route.paramMap.subscribe((params) => {
+          const examKey = params.get('exam'); 
+          const examId = examIdMap[examKey!];
+
+          if (examId !== undefined) {
+            console.log(this.examData);
+            const foundExam = this.examData.find((e: any) => e.id === examId);
+            
+            if (foundExam) {
+              this.examDataSelected = foundExam;
+            } else {
+              console.warn(`No exam found with ID ${examId}`);
+            }
+          } else {
+            console.warn(`Invalid exam type in route: ${examKey}`);
+          }
+        });
       }
     });
   }
- 
+
 
   // ✅ Reusable method to fetch data
   loadBlobData(url: string) {
