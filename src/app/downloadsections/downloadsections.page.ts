@@ -16,7 +16,7 @@ export class DownloadSectionsPage implements OnInit {
   selectedSubjectIndex: number | null = null;
   selectedSectionIndex: number | null = null;
   selectedSection: any = {}; // To store the selected section data and its questions
-
+dropdownOpen: boolean = false; // To control the dropdown state
   constructor(private blobService: BlobService) {}
 
   ngOnInit() {
@@ -35,14 +35,41 @@ export class DownloadSectionsPage implements OnInit {
     });
   }
 
-  // Handle subject selection
   selectSubject(index: number) {
     if (this.selectedSubjectIndex !== index) {
       this.selectedSubjectIndex = index;
-      this.selectedSectionIndex = null; // Reset only if subject changes
-      this.selectedSection = {};        // Reset section data
-    }// Reset selected section data
+      this.dropdownOpen = true;
+      // Do NOT reset section or change selectedSection content
+    } else {
+      this.dropdownOpen = !this.dropdownOpen;
+    }
   }
+  
+  // selectSubject(index: number) {
+  //   console.log("selectedSubjectIndex", this.selectedSubjectIndex)
+  //   if (this.selectedSubjectIndex === index) {
+  //     this.selectedSubjectIndex = index;
+   
+  //     // If the same subject is clicked, toggle the dropdown
+  //     this.dropdownOpen = !this.dropdownOpen;
+  //   } else {
+  //     // If a different subject is clicked, close the current dropdown and open the new one
+  //     this.selectedSubjectIndex = index;
+  //     this.dropdownOpen = true;  // Open the dropdown for the selected subject
+  //   }
+  // }
+  
+  
+  selectSection(subjectIndex: number, sectionIndex: number) {
+    console.log("selectedSubjectIndex", this.selectedSubjectIndex,subjectIndex)
+    this.dropdownOpen = !this.dropdownOpen;
+
+      // Otherwise, set the new section
+      this.selectedSectionIndex = sectionIndex;
+      this.selectedSection = this.jsonData[subjectIndex].sections[sectionIndex];
+    
+  }
+  
 
   // Handle answer selection for MCQ and MSQ
   handleAnswer(questionId: number, selectedOption: string, event?: any) {
@@ -209,12 +236,12 @@ export class DownloadSectionsPage implements OnInit {
   }
 
   // Handle section selection
-  selectSection(index: number) {
-    if (this.selectedSubjectIndex !== null && index !== null) {
-      this.selectedSectionIndex = index;
-      this.selectedSection = this.jsonData[this.selectedSubjectIndex].sections[this.selectedSectionIndex];
-    }
-  }
+  // selectSection(index: number) {
+  //   if (this.selectedSubjectIndex !== null && index !== null) {
+  //     this.selectedSectionIndex = index;
+  //     this.selectedSection = this.jsonData[this.selectedSubjectIndex].sections[this.selectedSectionIndex];
+  //   }
+  // }
 
   
   // Helper function to get alphabetic label

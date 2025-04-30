@@ -11,28 +11,37 @@
 <ion-content>
   <div *ngIf="jsonData.length > 0">
     <!-- Row 1: Subjects -->
-    <ion-grid>
-      <ion-row class="ion-content-border">
-        <ion-col size="auto" *ngFor="let subject of jsonData; let subjectIndex = index">
-          <ion-button 
-            [color]="selectedSubjectIndex === subjectIndex ? 'primary' : 'medium'"
-            (click)="selectSubject(subjectIndex)">
-            {{ subject.SubjectName }}
-          </ion-button>
-        </ion-col>
-      </ion-row>
+   
+      <!-- Row 1: Subjects -->
+    
+        <ion-grid>
+          <ion-row class="ion-content-border">
+            <ion-col size="auto" *ngFor="let subject of jsonData; let subjectIndex = index">
+              <ion-button 
+                [color]="selectedSubjectIndex === subjectIndex ? 'primary' : 'medium'"
+                (click)="selectSubject(subjectIndex)">
+                {{ subject.SubjectName }}
+              </ion-button>
+      
+              <!-- Sections Dropdown -->
+              <ion-row 
+              *ngIf="selectedSubjectIndex === subjectIndex && dropdownOpen"
+              class="dropdownbox">
+              <div 
+                size="auto"
+                *ngFor="let section of subject.sections; let sectionIndex = index"
+                (click)="selectSection(subjectIndex, sectionIndex)">
+                {{ section.SectionName }}
+              </div>
+            </ion-row>
+            
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-      <!-- Row 2: Sections -->
-      <ion-row *ngIf="selectedSubjectIndex !== null">
-        <ion-col size="auto" *ngFor="let section of jsonData[selectedSubjectIndex].sections; let sectionIndex = index">
-          <ion-button 
-            [color]="selectedSectionIndex === sectionIndex ? 'secondary' : 'medium'"
-            (click)="selectSection(sectionIndex)">
-            {{ section.SectionName }}
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      
+
+    
 
     <!-- Section Questions -->
     <div *ngIf="selectedSectionIndex !== null">
